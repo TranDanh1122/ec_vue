@@ -4,6 +4,7 @@ import { RouterView } from 'vue-router';
 </script>
 <template>
         <Header />
-        1234
+        <div class="bg-very_dark">
         <RouterView />
+        </div>
 </template>
