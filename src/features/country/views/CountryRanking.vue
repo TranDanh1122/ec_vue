@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { Search, Filter, Table } from '@/features/country';
+import { Search, Filter, CountryTable } from '@/features/country';
+import { fetchAllCountries } from "@/features/country"
+const { data: countries } = fetchAllCountries()
 </script>
 <template>
-    <div
-        class="grid grid-cols-4 grid-rows-[max-content_auto] gap-3.5 gap-y-10 container mx-auto border-grey border rounded-xl shadow-md shadow-dark p-6">
+    <div class="grid grid-cols-4 grid-rows-[max-content_auto] bg-very_dark
+        gap-3.5 gap-y-10 container mx-auto border-grey -translate-y-10 
+        border rounded-xl shadow-md shadow-dark p-6">
         <div class="col-span-4 text-center flex items-center justify-between h-fit">
             <Search />
         </div>
@@ -11,7 +14,7 @@ import { Search, Filter, Table } from '@/features/country';
             <Filter />
         </div>
         <div class="col-span-3 text-center ">
-            <Table />
+            <CountryTable />
         </div>
     </div>
 </template>

@@ -8,7 +8,7 @@ export const router = createRouter({
    
                 {
                     path: '/',
-                    component: Layout,
+                    component:  Layout,
                     children: [
                         ...CountryRouter
                     ]
