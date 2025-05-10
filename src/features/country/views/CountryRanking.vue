@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { Search, Filter, CountryTable } from '@/features/country';
-import { fetchAllCountries } from "@/features/country"
-const { data: countries } = fetchAllCountries()
 </script>
 <template>
     <div class="grid grid-cols-4 grid-rows-[max-content_auto] bg-very_dark

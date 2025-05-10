@@ -17,7 +17,8 @@ export interface Country {
     name: CountryName,
     population: number,
     area: number,
-    region: string
+    region: string,
+    subregion: string,
     flags: CountryFlag,
     capital: string[],
     independent: boolean,
