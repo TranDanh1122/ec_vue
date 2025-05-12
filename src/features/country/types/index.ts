@@ -1,8 +1,10 @@
+import type { Ref } from "vue"
+
 interface Name {
     common: string,
     official: string
 }
-interface CountryName extends Name {
+export interface CountryName extends Name {
     nativeName: Record<string, Name>
 }
 interface CountryFlag {
@@ -18,9 +20,46 @@ export interface Country {
     population: number,
     area: number,
     region: string,
-    subregion: string,
+    subregion?: string,
     flags: CountryFlag,
     capital: string[],
     independent: boolean,
     unMember: boolean,
+}
+export type Sort = "asc" | "desc"
+export type SortBy = "population" | "name" | "area"
+export type Paginate = {
+    page: number,
+    offset: number,
+    limit: number
+}
+
+export type CountryStatusFilter = "independent" | "unmember"
+
+export interface CountryStoreState {
+    countries: Country[],
+    search: string,
+    sortBy: SortBy,
+    regions: Ref<Set<string>>,
+    countryStatus: Set<CountryStatusFilter>
+    paginate: Paginate,
+    loading: boolean,
+    sort: Sort
+}
+export interface CountryStoreGetters extends Record<string, any> {
+    filteredCountries: () => Country[],
+    paginatedCountries: () => Country[],
+    total: () => number,
+    totalPage: () => number,
+
+}
+export interface CountryStoreActions {
+    changeSortBy: (sortBy: SortBy) => void,
+    changeRegionFilter: (region: string) => void,
+    changeStatusFilter: (status: CountryStatusFilter) => void,
+    changePage: (page: number) => void,
+    searching: (search: string) => void,
+    setCountries: (countries: Country[]) => void,
+    loadingTable: (isLoading: boolean) => void,
+    changeSort: (sort: Sort) => void
 }
