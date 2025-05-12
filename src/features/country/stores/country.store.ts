@@ -119,7 +119,7 @@ export const CountryStore = defineStore<"countries", CountryStoreState, CountryS
             return this.filteredCountries.length
         },
         totalPage() {
-            return Math.ceil(this.filteredCountries.length / this.paginate.limit)
+            return Math.ceil(this.filteredCountries.length / this.paginate.limit) - 1
         }
     }
 })
