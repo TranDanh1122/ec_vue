@@ -1,14 +1,20 @@
 import { useQuery } from "@tanstack/vue-query";
 import { getCountries, getCountry, type Country } from "@/features/country";
-import { watch, watchEffect, type Ref } from "vue";
-import { queryClient } from "@/utls/tanstack-client";
+import { type Ref } from "vue";
 
-export const getCountriesQueryFn = async (sort? :string) => {
+
+export const getCountriesQueryFn = async (sort?: string) => {
     const res = await getCountries(sort);
     if (res.status != 200) throw new Error(res.statusText);
     return res.data as Country[];
 };
 
+export const getCountryQueryFn = async (countryCode: string) => {
+    const res = await getCountry(countryCode);
+    if (res.status != 200) throw new Error(res.statusText);
+    const [country , ..._] = res.data
+    return country as Country;
+}
 /**
  * Vue query get all countries
  * @param (string?) sort
@@ -41,11 +47,13 @@ export const fetchCountryDetail = (countryCode: string) => {
     return useQuery({
         queryKey: ["country", countryCode],
         queryFn: async () => {
-            const res = await getCountry(countryCode);
-            if (res.status != 200) throw new Error(res.statusText);
-            return res.data as Country;
+            try {                
+                return await getCountryQueryFn(countryCode);
+            } catch (e) {
+                console.error("Fetch Countries Error", e);
+            }
         },
-        staleTime: 3 * 1000, //sau 3 phút, fetch lại nếu cần sử dụng data này (after 3 min, re-fetch if still using/need this data)
-        gcTime: 5 * 1000, // sau 5 phút không được sử dụng, xóa hắn data (after 5 min not using this data, delete it , fetch when need it again)
+        staleTime: 3 * 60 * 1000, //sau 3 phút, fetch lại nếu cần sử dụng data này (after 3 min, re-fetch if still using/need this data)
+        gcTime: 5 * 60 * 1000, // sau 5 phút không được sử dụng, xóa hắn data (after 5 min not using this data, delete it , fetch when need it again)
     });
 };

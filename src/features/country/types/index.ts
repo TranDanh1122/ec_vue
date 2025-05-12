@@ -11,6 +11,10 @@ interface CountryFlag {
     png: string,
     alt: string
 }
+interface Currency {
+    symbol : string,
+    name : string
+}
 /**
  * Country Data Interface
  */
@@ -25,6 +29,11 @@ export interface Country {
     capital: string[],
     independent: boolean,
     unMember: boolean,
+    cca2 : string,
+    languages: Record<string , string>,
+    currencies : Record<string , Currency>,
+    continents : string[]
+
 }
 export type Sort = "asc" | "desc"
 export type SortBy = "population" | "name" | "area"
@@ -44,7 +53,7 @@ export interface CountryStoreState {
     countryStatus: Ref<Set<CountryStatusFilter>>
     paginate: Paginate,
     loading: boolean,
-    sort: Sort
+    sort: Sort,
 }
 export interface CountryStoreGetters extends Record<string, any> {
     filteredCountries: () => Country[],

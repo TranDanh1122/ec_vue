@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { Paginate } from "@/components/"
 import { TABLE_HEADER, CountryStore } from "@/features/country"
+import { useRouter } from "vue-router"
+import { pageStore } from "@/stores/page.store"
 const countryStore = CountryStore()
-
+const router = useRouter()
 </script>
 <template>
     <div class="w-full space-y-2">
@@ -16,10 +18,13 @@ const countryStore = CountryStore()
                 </div>
             </div>
             <div class="table-row-group" role="rowgroup">
-                <div v-for="(country) in countryStore.paginatedCountries"
+                <div @click="() => {
+                    pageStore().setParam(country.cca2)
+                    router.push(`/country/${country.cca2}`)
+                }" v-for="(country) in countryStore.paginatedCountries"
                     class="table-row row-body text-very_grey text-left rounded-md cursor-pointer hover:bg-dark"
                     role="row">
-                    <div class="table-cell align-middle py-1 pl-1" role="cell">
+                    <div class="table-cell align-middle py-1.5 pl-1" role="cell">
                         <img :src="country.flags.png" :alt="country.name.common"
                             class="object-cover h-6 w-8 rounded-md">
                     </div>

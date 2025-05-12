@@ -1,8 +1,8 @@
 
 import { defineAsyncComponent } from "vue"
 import { queryClient } from "@/utls/tanstack-client"
-import {  getCountriesQueryFn } from "@/features/country"
-
+import { getCountriesQueryFn, getCountryQueryFn } from "@/features/country"
+import { pageStore } from "@/stores/page.store"
 const router = [
     {
         path: "",
@@ -21,6 +21,29 @@ const router = [
             },
 
         }),
+    },
+    {
+        path: "/country/:countryCode",
+        component: defineAsyncComponent({
+            loader: async () => {
+                try {
+                    const param = pageStore().currentParam
+                    if(param) {
+                        await queryClient.fetchQuery({
+                            queryKey: ['country', param],
+                            queryFn: () => getCountryQueryFn(param)
+                        })
+                    }
+                    return import("../views/CountryDetail.vue")
+                } catch (e) {
+                 
+                    return import("../views/CountryDetail.vue")
+                }
+
+            }
+        })
     }
+
+
 ]
 export default router
