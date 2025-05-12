@@ -41,7 +41,7 @@ export interface CountryStoreState {
     search: string,
     sortBy: SortBy,
     regions: Ref<Set<string>>,
-    countryStatus: Set<CountryStatusFilter>
+    countryStatus: Ref<Set<CountryStatusFilter>>
     paginate: Paginate,
     loading: boolean,
     sort: Sort

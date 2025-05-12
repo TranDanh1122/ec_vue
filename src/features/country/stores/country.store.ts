@@ -20,7 +20,7 @@ export const CountryStore = defineStore<"countries", CountryStoreState, CountryS
         sortBy: "population",
         sort: "asc",
         regions: ref(new Set<string>()),
-        countryStatus: new Set<CountryStatusFilter>(),
+        countryStatus: ref(new Set<CountryStatusFilter>()),
         paginate: {
             page: 1,
             offset: 0,
@@ -44,7 +44,13 @@ export const CountryStore = defineStore<"countries", CountryStoreState, CountryS
             this.regions =  newRegions
         },
         changeStatusFilter(statusFilter: CountryStatusFilter) {
-            this.countryStatus.add(statusFilter)
+            const newStatusFilter = new Set(this.countryStatus.values())
+            if(newStatusFilter.has(statusFilter)) {
+                newStatusFilter.delete(statusFilter)
+            }else {
+                newStatusFilter.add(statusFilter)
+            }
+            this.countryStatus  = newStatusFilter
         },
         changePage(page: number) {
             this.paginate.page = page
