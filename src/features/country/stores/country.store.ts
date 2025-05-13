@@ -58,7 +58,7 @@ export const CountryStore = defineStore<"countries", CountryStoreState, CountryS
         },
         changePage(page: number) {
             this.paginate.page = page
-            this.paginate.offset = page * this.paginate.limit
+            this.paginate.offset = (page - 1) * this.paginate.limit
         },
         searching(search: string) {
             this.search = search
@@ -125,7 +125,7 @@ export const CountryStore = defineStore<"countries", CountryStoreState, CountryS
             return this.filteredCountries.length
         },
         totalPage() {
-            return Math.ceil(this.filteredCountries.length / this.paginate.limit) - 1
+            return Math.ceil(this.filteredCountries.length / this.paginate.limit)
         }
     }
 })
