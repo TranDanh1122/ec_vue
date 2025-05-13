@@ -19,10 +19,12 @@ body {
     min-width: 100vw;
     min-height: 100vh;
 }
+
 #app {
     width: 100%;
     height: 100%;
 }
+
 @layer components {
     .h1 {
         font-weight: 700;
@@ -59,3 +61,4 @@ body {
         font-weight: bold;
     }
 }
+

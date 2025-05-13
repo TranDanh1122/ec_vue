@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/vue-query";
-import { getCountries, getCountry } from "../api/country.api";
+import { getCountries, getCountry, getNeighbouringCountries } from "../api/country.api";
 import { type Ref } from "vue";
 import type { Country } from "../types"
 
@@ -15,6 +15,7 @@ export const getCountryQueryFn = async (countryCode: string) => {
     const [country, ..._] = res.data
     return country as Country;
 }
+
 /**
  * Vue query get all countries
  * @param (string?) sort
@@ -57,4 +58,19 @@ export const fetchCountryDetail = (countryCode: string) => {
         gcTime: 5 * 60 * 1000, // sau 5 phút không được sử dụng, xóa hắn data (after 5 min not using this data, delete it , fetch when need it again)
     });
 };
-
+export const fetchNeighBouringCountries = (codes: string[], countryCode: string) => {
+    return useQuery({
+        queryKey: ['neighbouring', countryCode],
+        queryFn: async () => {
+            try {
+                const res = await getNeighbouringCountries(codes)
+                if (res.status != 200) throw new Error(res.data.statusText)
+                return res.data as Country[]
+            } catch (error) {
+                console.error("Fetch Neibouring Countries Error", error);
+            }
+        },
+        staleTime: 3 * 60 * 1000, //sau 3 phút, fetch lại nếu cần sử dụng data này (after 3 min, re-fetch if still using/need this data)
+        gcTime: 5 * 60 * 1000, // sau 5 phút không được sử dụng, xóa hắn data (after 5 min not using this data, delete it , fetch when need it again)
+    })
+}

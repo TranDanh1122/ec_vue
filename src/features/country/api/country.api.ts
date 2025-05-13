@@ -16,6 +16,7 @@ export function getCountry(countryCode: string) {
     return axiosClient.get(`alpha/${countryCode}`)
 }
 
-export function searchCountries(codes : string[]) {
+export function getNeighbouringCountries(codes : string[]) {
     return axiosClient.get(`alpha?codes=${codes.join(',')}`)
 }
+

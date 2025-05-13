@@ -22,7 +22,7 @@ const router = useRouter()
                 <div @click="() => {
                     pageStore().setParam(country.cca2)
                     router.push(`/country/${country.cca2}`)
-                }" v-for="(country) in countryStore.paginatedCountries"
+                }" v-for="(country) in countryStore.paginatedCountries" :key="country.flag"
                     class="table-row row-body text-very_grey text-left rounded-md cursor-pointer hover:bg-dark"
                     role="row">
                     <div class="table-cell align-middle py-1.5 pl-1" role="cell">
