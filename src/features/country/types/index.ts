@@ -32,7 +32,8 @@ export interface Country {
     cca2 : string,
     languages: Record<string , string>,
     currencies : Record<string , Currency>,
-    continents : string[]
+    continents : string[],
+    borders : string[]
 
 }
 export type Sort = "asc" | "desc"

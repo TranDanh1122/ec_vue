@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/vue-query";
-import { getCountries, getCountry, type Country } from "@/features/country";
+import { getCountries, getCountry } from "../api/country.api";
 import { type Ref } from "vue";
+import type { Country } from "../types"
 
-
-export const getCountriesQueryFn = async (sort?: string) => {
-    const res = await getCountries(sort);
+export const getCountriesQueryFn = async () => {
+    const res = await getCountries();
     if (res.status != 200) throw new Error(res.statusText);
     return res.data as Country[];
 };
@@ -12,7 +12,7 @@ export const getCountriesQueryFn = async (sort?: string) => {
 export const getCountryQueryFn = async (countryCode: string) => {
     const res = await getCountry(countryCode);
     if (res.status != 200) throw new Error(res.statusText);
-    const [country , ..._] = res.data
+    const [country, ..._] = res.data
     return country as Country;
 }
 /**
@@ -26,7 +26,7 @@ export const fetchAllCountries = (sort?: Ref<string>) => {
         queryKey: ["countries", sort],
         queryFn: async () => {
             try {
-                return await getCountriesQueryFn(sort?.value);
+                return await getCountriesQueryFn();
             } catch (e) {
                 console.error("Fetch Countries Error", e);
             }
@@ -47,7 +47,7 @@ export const fetchCountryDetail = (countryCode: string) => {
     return useQuery({
         queryKey: ["country", countryCode],
         queryFn: async () => {
-            try {                
+            try {
                 return await getCountryQueryFn(countryCode);
             } catch (e) {
                 console.error("Fetch Countries Error", e);
@@ -57,3 +57,4 @@ export const fetchCountryDetail = (countryCode: string) => {
         gcTime: 5 * 60 * 1000, // sau 5 phút không được sử dụng, xóa hắn data (after 5 min not using this data, delete it , fetch when need it again)
     });
 };
+

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { CountryStore } from '@/features/country';
+import { CountryStore } from '../stores/country.store';
 import  debounce  from "lodash.debounce"
 const inputRef = ref<string>("")
 const countryStore = CountryStore()

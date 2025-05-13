@@ -4,8 +4,8 @@ import { axiosClient } from "@/axios";
  * @param (string) sort default = population
  * @returns
  */
-export function getCountries(sort: string = "population") {
-    return axiosClient.get(`all?sort=${sort}`)
+export function getCountries() {
+    return axiosClient.get(`all?fields=flag,name,population,area,region,subregion,flags,capital,independent,unMember,cca2,languages,currencies,continents,borders`)
 }
 /**
  * Get Contry API 
@@ -14,4 +14,8 @@ export function getCountries(sort: string = "population") {
  */
 export function getCountry(countryCode: string) {
     return axiosClient.get(`alpha/${countryCode}`)
+}
+
+export function searchCountries(codes : string[]) {
+    return axiosClient.get(`alpha?codes=${codes.join(',')}`)
 }

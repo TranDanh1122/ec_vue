@@ -8,7 +8,7 @@ import type {
     CountryStoreState,
     CountryName,
     Sort
-} from "@/features/country"
+} from "../types"
 import { ref  } from "vue"
 
 

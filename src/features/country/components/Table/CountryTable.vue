@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Paginate } from "@/components/"
-import { TABLE_HEADER, CountryStore } from "@/features/country"
+import { TABLE_HEADER } from "../../ults/const"
+import { CountryStore } from "../../stores/country.store"
 import { useRouter } from "vue-router"
 import { pageStore } from "@/stores/page.store"
 const countryStore = CountryStore()
@@ -25,7 +26,7 @@ const router = useRouter()
                     class="table-row row-body text-very_grey text-left rounded-md cursor-pointer hover:bg-dark"
                     role="row">
                     <div class="table-cell align-middle py-1.5 pl-1" role="cell">
-                        <img :src="country.flags.png" :alt="country.name.common"
+                        <img loading="lazy" :src="country.flags.png" :alt="country.flags.alt"
                             class="object-cover h-6 w-8 rounded-md">
                     </div>
                     <div class="table-cell align-middle py-1" role="cell">

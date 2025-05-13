@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { CountryStore, type SortBy } from '@/features/country';
-import {ArrowUpNarrowWide , ArrowDownWideNarrow} from "lucide-vue-next"
+import { CountryStore } from '../../stores/country.store';
+import type { SortBy } from '../../types'
+import { ArrowUpNarrowWide, ArrowDownWideNarrow } from "lucide-vue-next"
 const countryStore = CountryStore()
 </script>
 <template>
     <fieldset class="flex flex-col items-start gap-2">
-        <label for="sort" class="h4 text-very_grey flex items-center ">Sort by 
-            <ArrowUpNarrowWide class="size-5" v-if="countryStore.sort == 'asc'" @click="countryStore.changeSort('desc')" />
-            <ArrowDownWideNarrow class="size-5" v-if="countryStore.sort == 'desc'" @click="countryStore.changeSort('asc')" />
+        <label for="sort" class="h4 text-very_grey flex items-center ">Sort by
+            <ArrowUpNarrowWide class="size-5" v-if="countryStore.sort == 'asc'"
+                @click="countryStore.changeSort('desc')" />
+            <ArrowDownWideNarrow class="size-5" v-if="countryStore.sort == 'desc'"
+                @click="countryStore.changeSort('asc')" />
         </label>
         <div class="relative w-full">
             <select @change="(e: Event) => countryStore.changeSortBy((e.target as HTMLSelectElement).value as SortBy)"

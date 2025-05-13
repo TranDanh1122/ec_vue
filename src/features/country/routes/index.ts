@@ -1,7 +1,7 @@
 
 import { defineAsyncComponent } from "vue"
 import { queryClient } from "@/utls/tanstack-client"
-import { getCountriesQueryFn, getCountryQueryFn } from "@/features/country"
+import { getCountriesQueryFn, getCountryQueryFn } from "../services/country.svc"
 import { pageStore } from "@/stores/page.store"
 const router = [
     {
@@ -11,7 +11,7 @@ const router = [
                 try {
                     await queryClient.fetchQuery({
                         queryKey: ['countries', 'population'],
-                        queryFn: async () => await getCountriesQueryFn('population')
+                        queryFn: async () => await getCountriesQueryFn()
                     })
                     return import("../views/CountryRanking.vue")
                 } catch (e) {
@@ -24,24 +24,26 @@ const router = [
     },
     {
         path: "/country/:countryCode",
-        component: defineAsyncComponent({
-            loader: async () => {
-                try {
-                    const param = pageStore().currentParam
-                    if(param) {
-                        await queryClient.fetchQuery({
-                            queryKey: ['country', param],
-                            queryFn: () => getCountryQueryFn(param)
-                        })
+        component: () => {
+            const param = pageStore().currentParam
+            if (param) {
+              return  defineAsyncComponent({
+                    loader: async () => {
+                        try {
+                            await queryClient.fetchQuery({
+                                queryKey: ['country', param],
+                                queryFn: () => getCountryQueryFn(param)
+                            })
+                            return import("../views/CountryDetail.vue")
+                        } catch (e) {
+                            return import("../views/CountryDetail.vue")
+                        }
                     }
-                    return import("../views/CountryDetail.vue")
-                } catch (e) {
-                 
-                    return import("../views/CountryDetail.vue")
-                }
-
+                })
+            }else {
+                return import("../views/CountryDetail.vue")
             }
-        })
+        }
     }
 
 

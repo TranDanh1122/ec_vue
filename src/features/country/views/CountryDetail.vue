@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { fetchCountryDetail } from '@/features/country'
+import { fetchCountryDetail } from '../services/country.svc'
 import { useRoute } from "vue-router"
 
 const router = useRoute()
@@ -10,8 +10,8 @@ const { data: country, isLoading } = fetchCountryDetail(countryCode as string)
 </script>
 <template>
     <div v-if="isLoading"
-        class="fixed w-screen h-screen top-0 left-0 bg-black flex items-center justify-center text-white">
-        Pls wait for my API, it's like you—just a few seconds, or maybe shorter...
+        class="fixed w-screen h-screen top-0 left-0 bg-very_dark flex items-center justify-center text-white">
+        Pls wait for my API, it's like you—just a few111111 seconds, or maybe shorter...
     </div>
     <div v-if="!isLoading && country">
         <div class=" bg-very_dark text-very_grey
@@ -24,11 +24,11 @@ const { data: country, isLoading } = fetchCountryDetail(countryCode as string)
             <div class="flex items-center justify-around mt-12">
                 <div class="p-2 bg-dark rounded-md flex items-center justify-center w-1/3">
                     <span class="w-full text-center shrink border-r border-very_dark px-2">Populations</span>
-                    <span class="text-center w-full">{{ country.population.toLocaleString() }}</span>
+                    <span class="text-center w-full px-2">{{ country.population.toLocaleString() }}</span>
                 </div>
-                <div class="p-2 bg-dark rounded-md flex items-center justify-center-safe w-1/3">
+                <div class="p-2 bg-dark rounded-md flex items-center justify-center w-1/3">
                     <span class="w-full text-center shrink border-r border-very_dark px-2">Area (km <sup>2</sup>)</span>
-                    <span class="w-full text-center">{{ country.area.toLocaleString() }}</span>
+                    <span class="w-full text-center px-2">{{ country.area.toLocaleString() }}</span>
                 </div>
             </div>
             <div class="flex items-center w-full justify-between p-4 border-t-dark border-t mt-12">
