@@ -2,7 +2,7 @@
 
 import { fetchCountryDetail } from '../services/country.svc'
 import { useRoute } from "vue-router"
-import { defineAsyncComponent, Suspense, watchEffect } from 'vue'
+import { defineAsyncComponent, watchEffect } from 'vue'
 const router = useRoute()
 const { countryCode } = router.params
 const { data: country, isLoading } = fetchCountryDetail(countryCode as string)

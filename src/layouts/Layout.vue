@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Header from './Header.vue';
 import { RouterView } from 'vue-router';
-import { Suspense } from "vue"
 </script>
 <template>
         <div class="flex flex-col h-full min-h-screen">

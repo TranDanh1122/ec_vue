@@ -17,7 +17,7 @@ app.use(Toast);
 app.mount('#app')
 const toast = useToast()
 
-app.config.errorHandler = (err: any, instance, info) => {
+app.config.errorHandler = (err: any) => {
     console.error('[ERROR]', err)
     toast.error(err.message || err)
 }
