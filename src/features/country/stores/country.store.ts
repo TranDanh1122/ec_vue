@@ -42,6 +42,8 @@ export const CountryStore = defineStore<"countries", CountryStoreState, CountryS
                 newRegions.add(region)
             }
             this.regions =  newRegions
+            this.paginate.offset = 0
+            this.paginate.page = 1
         },
         changeStatusFilter(statusFilter: CountryStatusFilter) {
             const newStatusFilter = new Set(this.countryStatus.values())
@@ -51,6 +53,8 @@ export const CountryStore = defineStore<"countries", CountryStoreState, CountryS
                 newStatusFilter.add(statusFilter)
             }
             this.countryStatus  = newStatusFilter
+            this.paginate.offset = 0
+            this.paginate.page = 1
         },
         changePage(page: number) {
             this.paginate.page = page
@@ -58,6 +62,8 @@ export const CountryStore = defineStore<"countries", CountryStoreState, CountryS
         },
         searching(search: string) {
             this.search = search
+            this.paginate.offset = 0
+            this.paginate.page = 1
         },
         setCountries(countries: Country[]) {
             this.countries = countries

@@ -26,8 +26,7 @@ const router = useRouter()
                     class="table-row row-body text-very_grey text-left rounded-md cursor-pointer hover:bg-dark"
                     role="row">
                     <div class="table-cell align-middle py-1.5 pl-1" role="cell">
-                        <img loading="lazy" :src="country.flags.png" :alt="country.flags.alt"
-                            class="object-cover h-6 w-8 rounded-md">
+                        <img :src="country.flags.png" :alt="country.flags.alt" class="object-cover h-6 w-8 rounded-md">
                     </div>
                     <div class="table-cell align-middle py-1" role="cell">
                         {{ country.name.common }}
