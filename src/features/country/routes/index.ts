@@ -16,10 +16,9 @@ const router = [
                     return import("../views/CountryRanking.vue")
                 } catch (e) {
                     console.error("Pre fetch contries error", e)
-                    return import("@/features/notfound/NotFound.vue")
+                    throw new Error(`${e}`)
                 }
-            },
-
+            }
         }),
     },
     {
@@ -27,7 +26,7 @@ const router = [
         component: () => {
             const param = pageStore().currentParam
             if (param) {
-              return  defineAsyncComponent({
+                return defineAsyncComponent({
                     loader: async () => {
                         try {
                             await queryClient.fetchQuery({
@@ -40,7 +39,7 @@ const router = [
                         }
                     }
                 })
-            }else {
+            } else {
                 return import("../views/CountryDetail.vue")
             }
         }

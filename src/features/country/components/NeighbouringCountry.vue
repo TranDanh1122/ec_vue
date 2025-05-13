@@ -8,7 +8,7 @@ const router = useRouter()
 </script>
 <template>
     <div v-if="isLoading" class="w-full flex flex-wrap gap-4 justify-center">
-        <div v-for="(_, key) in Array.from({length: 5 })" :key class="p-1 cursor-pointer w-1/6 space-y-2">
+        <div v-for="(_, key) in Array.from({ length: 5 })" :key class="p-1 cursor-pointer w-1/6 space-y-2">
             <div class="h-18 w-full bg-dark"></div>
             <div class="w-full h-4 rounded-md line-clamp-1 truncate text-center bg-dark"></div>
         </div>
