@@ -14,9 +14,9 @@ watch(inputRef,() => {
 </script>
 <template>
     <span class="h2 text-very_grey">Found {{ countryStore.total }} countries</span>
-    <fieldset class="bg-dark h-fit flex items-center rounded-md px-2">
+    <fieldset class="bg-dark h-fit flex items-center rounded-md px-2 w-full sm:w-auto">
         <i class="block size-7 bg-very_grey"></i>
-        <input type="text" class="p-2 h3 focus-visible:outline-0 placeholder:text-grey text-very_grey min-w-[345px]"
+        <input type="text" class="p-2 h3 focus-visible:outline-0 placeholder:text-grey text-very_grey w-full sm:min-w-[345px]"
             placeholder="Search by Name, Region, Subregion" v-model="inputRef">
     </fieldset>
 

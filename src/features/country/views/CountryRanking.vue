@@ -19,15 +19,15 @@ watchEffect(() => {
 </script>
 <template>
     <div class="grid grid-cols-4 grid-rows-[max-content_auto] bg-very_dark
-        gap-3.5 gap-y-10 container mx-auto border-grey -translate-y-10 transform-gpu will-change
+        gap-3.5 gap-y-10 sm:container w-[95%] sm:w-full mx-auto border-grey sm:-translate-y-15 -translate-y-10 transform-gpu will-change
         border rounded-xl shadow-md shadow-dark p-6">
-        <div class="col-span-4 text-center flex items-center justify-between h-fit">
+        <div class="col-span-4 text-center flex sm:flex-row flex-col sm:items-center items-start justify-between h-fit gap-2">
             <Search />
         </div>
-        <div class="text-center space-y-6">
+        <div class="text-center space-y-6 col-span-4 sm:col-span-1">
             <Filter />
         </div>
-        <div class="col-span-3 text-center ">
+        <div class="col-span-4 sm:col-span-3 text-center ">
             <CountryTable />
         </div>
     </div>
