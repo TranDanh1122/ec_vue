@@ -2,11 +2,15 @@
 
 import { fetchCountryDetail } from '../services/country.svc'
 import { useRoute } from "vue-router"
-import { defineAsyncComponent, Suspense } from 'vue'
+import { computed, defineAsyncComponent, onMounted, Suspense, watchEffect } from 'vue'
 const router = useRoute()
 const { countryCode } = router.params
 const { data: country, isLoading } = fetchCountryDetail(countryCode as string)
 const NeighbouringCountry = defineAsyncComponent(() => import('../components/NeighbouringCountry.vue')) 
+watchEffect(() => {
+    document.title = `Country | ${country.value?.name.common ?? ''}`
+})
+
 </script>
 <template>
     <div v-if="isLoading"
