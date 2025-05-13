@@ -23,26 +23,22 @@ const router = [
     },
     {
         path: "/country/:countryCode",
-        component: () => {
-            const param = pageStore().currentParam
-            if (param) {
-                return defineAsyncComponent({
-                    loader: async () => {
-                        try {
-                            await queryClient.fetchQuery({
-                                queryKey: ['country', param],
-                                queryFn: () => getCountryQueryFn(param)
-                            })
-                            return import("../views/CountryDetail.vue")
-                        } catch (e) {
-                            return import("../views/CountryDetail.vue")
-                        }
+        component: defineAsyncComponent({
+            loader: async () => {
+                try {
+                    const param = pageStore().currentParam
+                    if (param) {
+                        await queryClient.fetchQuery({
+                            queryKey: ['country', param],
+                            queryFn: () => getCountryQueryFn(param)
+                        })
                     }
-                })
-            } else {
+                } catch (e) {
+                    throw new Error(`${e}`)
+                }
                 return import("../views/CountryDetail.vue")
             }
-        }
+        })
     }
 
 
